@@ -20,4 +20,6 @@ public enum Configuration {
     public Random randomSeed = new MersenneTwisterFast(System.currentTimeMillis());
 
     public ArrayList<City> availableCities;
+
+    public int populataionSize = 50;
 }
