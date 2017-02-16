@@ -1,5 +1,9 @@
 package main;
 
+import random.MersenneTwisterFast;
+
+import java.util.Random;
+
 public enum Configuration {
     instance;
 
@@ -10,4 +14,6 @@ public enum Configuration {
     public String dataFilePath = dataDirectory + "TSP280.txt";
 
     public String databaseFile = dataDirectory + "datastore.db";
+
+    public Random randomSeed = new MersenneTwisterFast(System.currentTimeMillis());
 }
