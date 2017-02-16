@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface ISelection {
     /**
      * @param population Population from which the Tours are selected from
-     * @return A straight number of Tours according to the config
+     * @return 2 dimensional array of tours with a straight number of tours according to the config
      */
-    ArrayList<Tour> doSelection(Population population);
+    Tour[][] doSelection(Population population);
 }
