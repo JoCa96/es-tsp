@@ -1,7 +1,9 @@
 package main;
 
+import base.City;
 import random.MersenneTwisterFast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public enum Configuration {
@@ -16,5 +18,7 @@ public enum Configuration {
     public String databaseFile = dataDirectory + "datastore.db";
 
     public Random randomSeed = new MersenneTwisterFast(System.currentTimeMillis());
+
+    public ArrayList<City> availableCities;
     public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
 }

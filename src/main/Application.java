@@ -12,7 +12,7 @@ import mutation.IMutation;
 import selection.ISelection;
 
 public class Application {
-    private ArrayList<City> availableCities;
+
     private double[][] distances;
 
     private ISelection selection;
@@ -44,8 +44,8 @@ public class Application {
         instanceReader.open();
         TSPLIBReader tspLibReader = new TSPLIBReader(instanceReader);
 
-        availableCities = tspLibReader.getCities();
-        System.out.println("availableCities (size) : " + availableCities.size());
+        Configuration.instance.availableCities = tspLibReader.getCities();
+        System.out.println("availableCities (size) : " + Configuration.instance.availableCities.size());
 
         distances = tspLibReader.getDistances();
         printMatrix(distances);
