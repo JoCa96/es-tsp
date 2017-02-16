@@ -1,5 +1,7 @@
 package base;
 
+import main.Configuration;
+
 import java.util.ArrayList;
 
 public class Population {
@@ -10,7 +12,7 @@ public class Population {
     }
 
     public void generateRandom() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < Configuration.instance.populataionSize; i++) {
             tours.add(Tour.generateRandom());
         }
     }
