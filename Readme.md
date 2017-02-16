@@ -1,23 +1,23 @@
 # TSP Team Verteilung
 
 ## Selection
-Chris Sayer: RouletteWheelSelection
-Johnatan: TournamentSelection
+- Chris Sayer: RouletteWheelSelection
+- Johnatan: TournamentSelection
 
 ## Crossover
-Johannes: OrderedCrossover
-Annika: PartiallyMatchedCrossover
-Felix: CycleCrossover
-Judith: HeuristicCrossover
-Philipp: PositionBasedCrossover
-Max: SubTourExchangeCrossover
+- Johannes: OrderedCrossover
+- Annika: PartiallyMatchedCrossover
+- Felix: CycleCrossover
+- Judith: HeuristicCrossover
+- Philipp: PositionBasedCrossover
+- Max: SubTourExchangeCrossover
 
 ## Mutation
-Bernd: DisplacementMutation, ExchangeMutation
-Jan-Filip: HeuristicMutation, InsertionMutation, InversionMutation
+- Bernd: DisplacementMutation, ExchangeMutation
+- Jan-Filip: HeuristicMutation, InsertionMutation, InversionMutation
 
 ## bruteforce
-Philipp: Bruteforce
+- Philipp: Bruteforce
 
 ## statistics / tests
-Chris Oboe: Statistics/Test
+- Chris Oboe: Statistics/Test
