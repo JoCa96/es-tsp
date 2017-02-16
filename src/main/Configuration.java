@@ -21,5 +21,5 @@ public enum Configuration {
 
     public ArrayList<City> availableCities;
 
-    public int populataionSize = 50;
+    public int populataionSize = 150;
 }

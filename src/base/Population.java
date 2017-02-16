@@ -12,8 +12,12 @@ public class Population {
     }
 
     public void generateRandom() {
-        for (int i = 0; i < Configuration.instance.populataionSize; i++) {
-            tours.add(Tour.generateRandom());
+        tours.clear();
+        while (tours.size() != Configuration.instance.populataionSize) {
+            Tour tour = Tour.generateRandom();
+            if (!tours.contains(tour)) {
+                tours.add(tour);
+            }
         }
     }
 
