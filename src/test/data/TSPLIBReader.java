@@ -1,9 +1,7 @@
 package test.data;
 
-
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import data.InstanceReader;
 import main.Configuration;
