@@ -3,6 +3,7 @@ package main;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import base.City;
+import base.Population;
 import crossover.ICrossover;
 import data.HSQLDBManager;
 import data.InstanceReader;
@@ -11,7 +12,7 @@ import mutation.IMutation;
 import selection.ISelection;
 
 public class Application {
-    private ArrayList<City> availableCities;
+
     private double[][] distances;
 
     private ISelection selection;
@@ -43,8 +44,8 @@ public class Application {
         instanceReader.open();
         TSPLIBReader tspLibReader = new TSPLIBReader(instanceReader);
 
-        availableCities = tspLibReader.getCities();
-        System.out.println("availableCities (size) : " + availableCities.size());
+        Configuration.instance.availableCities = tspLibReader.getCities();
+        System.out.println("availableCities (size) : " + Configuration.instance.availableCities.size());
 
         distances = tspLibReader.getDistances();
         printMatrix(distances);
@@ -62,6 +63,8 @@ public class Application {
     public void execute() {
         System.out.println("--- GeneticAlgorithm.execute()");
         HSQLDBManager.instance.insert("hello world");
+
+        Population population = new Population();
     }
 
     public static void main(String... args) {
