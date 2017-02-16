@@ -3,14 +3,16 @@ package base;
 import java.util.ArrayList;
 
 public class Population {
-    private ArrayList<Tour> tours;
+    private ArrayList<Tour> tours = new ArrayList<Tour>();
 
     public Population() {
         generateRandom();
     }
 
     public void generateRandom() {
-        // TODO Zufällige anfangs population erstellen.
+        for (int i = 0; i < 50; i++) {
+            tours.add(Tour.generateRandom());
+        }
     }
 
     public ArrayList<Tour> getTours() {
