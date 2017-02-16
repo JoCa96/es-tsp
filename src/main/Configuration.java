@@ -22,5 +22,5 @@ public enum Configuration {
     public ArrayList<City> availableCities;
     public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
 
-    public int populataionSize = 50;
+    public int populataionSize = 150;
 }
