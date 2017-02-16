@@ -14,7 +14,7 @@ public class RouletteWheelSelection implements ISelection {
 
     private MersenneTwisterFast mersenneTwisterFast;
 
-    public ArrayList<Tour> doSelection(Population population) {
+    public Tour[][] doSelection(Population population) {
         /*
             ############### Roulette Selection ###############
 
