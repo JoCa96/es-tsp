@@ -1,12 +1,10 @@
 package bruteforce;
 
 
-import base.City;
-import base.Tour;
+import java.util.ArrayList;
+
 import data.InstanceReader;
 import data.TSPLIBReader;
-import random.MersenneTwisterFast;
-import java.util.ArrayList;
 
 public class Bruteforce {
 
