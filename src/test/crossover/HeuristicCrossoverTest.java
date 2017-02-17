@@ -9,7 +9,6 @@ import org.junit.Test;
 import base.City;
 import base.Tour;
 import crossover.HeuristicCrossover;
-import main.Application;
 import test.AbstractTest;
 
 public class HeuristicCrossoverTest extends AbstractTest{
