@@ -8,7 +8,10 @@ import data.HSQLDBManager;
 import data.InstanceReader;
 import data.TSPLIBReader;
 import mutation.IMutation;
+import random.MersenneTwisterFast;
 import selection.ISelection;
+import selection.RouletteWheelSelection;
+import selection.TournamentSelection;
 
 public class Application {
 
@@ -64,6 +67,8 @@ public class Application {
         executionMode.selectionMode = Mode.SelectionMode.ROULETTE_WHEEL;
         executionMode.crossoverMode = Mode.CrossoverMode.CYCLE;
         executionMode.mutationMode = Mode.MutationMode.DISPLACEMENT;
+
+        Configuration.instance.executionMode = executionMode;
     }
 
     public void execute() {
@@ -71,6 +76,19 @@ public class Application {
         HSQLDBManager.instance.insert("hello world");
 
         Population population = new Population();
+
+        ISelection selection;
+        switch (Configuration.instance.executionMode.selectionMode) {
+            case ROULETTE_WHEEL:
+                selection = new RouletteWheelSelection(new MersenneTwisterFast(System.currentTimeMillis()));
+                break;
+
+            default:
+                selection = new TournamentSelection(new MersenneTwisterFast(System.currentTimeMillis()));
+                break;
+        }
+
+        selection.doSelection(population);
     }
 
     public static void main(String... args) {
