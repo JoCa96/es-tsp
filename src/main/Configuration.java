@@ -20,7 +20,10 @@ public enum Configuration {
     public Random randomSeed = new MersenneTwisterFast(System.currentTimeMillis());
 
     public ArrayList<City> availableCities;
-    public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
 
     public int populataionSize = 150;
+
+    /*    Selection-Configuration    */
+    public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
+    public int tournamentGroupSize = 3;   //Number of challengers in a group (Only Tournament Selection)
 }

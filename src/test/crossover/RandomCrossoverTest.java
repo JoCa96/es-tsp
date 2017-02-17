@@ -8,11 +8,10 @@ import org.junit.Test;
 
 import base.City;
 import base.Tour;
-import crossover.CycleCrossover;
-import crossover.HeuristicCrossover;
+import crossover.RandomCrossover;
 import test.AbstractTest;
 
-public class HeuristicCrossoverTest extends AbstractTest{
+public class RandomCrossoverTest extends AbstractTest{
 
 	@Test
 	public void testDoCrossover() {
@@ -21,8 +20,9 @@ public class HeuristicCrossoverTest extends AbstractTest{
 		Tour t2 = Tour.generateRandom();
 		System.out.println(t1);
 		System.out.println(t2);
-		Tour[] tk = new HeuristicCrossover().doCrossover(t1, t2);
-		System.out.println(tk);
+		Tour[] tk = new RandomCrossover().doCrossover(t1, t2);
+		System.out.println(tk[0]);
+		System.out.println(tk[1]);
 		HashMap<City, City> tmp = new HashMap<City, City>();
 		for (City c : tk[0].getCities()) {
 			tmp.put(c, c);
@@ -37,7 +37,6 @@ public class HeuristicCrossoverTest extends AbstractTest{
 		for (City c : tk[1].getCities()) {
 			tmp.put(c, c);
 		}
-		System.out.println(tmp);
 		if (tmp.size() != tk[1].getSize())
 			fail("Nicht alle Elemente vorhanden");
 		for (int i = 0; i < tk[1].getCities().size(); i++) {
@@ -45,5 +44,6 @@ public class HeuristicCrossoverTest extends AbstractTest{
 				return;
 			}
 		}
+	}
 
-	}}
+}

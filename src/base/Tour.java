@@ -53,9 +53,8 @@ public class Tour implements Comparable<Tour> {
 			double y2 = getCity(i + 1).getY();
 			distance = distance + euclideanDistance(x1, y1, x2, y2);
 		}
-
-		return distance;
-	}
+        return 1/distance;
+    }
 
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();

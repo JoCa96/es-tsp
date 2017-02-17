@@ -13,7 +13,7 @@ import main.Configuration;
  *
  */
 public class CycleCrossover implements ICrossover {
-	public Tour doCrossover(Tour tour01, Tour tour02) {
+	public Tour[] doCrossover(Tour tour01, Tour tour02) {
 		final List<Integer> cI = new Vector<Integer>();
 
 		int t1 = Configuration.instance.randomSeed.nextInt(tour01.getSize() - 1);
@@ -30,7 +30,7 @@ public class CycleCrossover implements ICrossover {
 			tour01.getCities().set(index, tour02.getCities().get(index));
 			tour02.getCities().set(index, tmp);
 		}
-		return tour01;
+		return new Tour[] { tour01, tour02 };
 	}
 
 	public String toString() {
