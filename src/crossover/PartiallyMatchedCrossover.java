@@ -9,7 +9,7 @@ import main.Configuration;
 
 public class PartiallyMatchedCrossover implements ICrossover {
     public Tour[] doCrossover(Tour tour01,Tour tour02) {
-	
+	 
 	    List<City> parent1 = tour01.getCities();
 	    List<City> parent2 = tour02.getCities();
 	
