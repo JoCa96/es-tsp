@@ -19,7 +19,7 @@ public enum Configuration {
 
     public Random randomSeed = new MersenneTwisterFast(System.currentTimeMillis());
 
-    public ArrayList<City> availableCitie;
+    public ArrayList<City> availableCities;
     public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
 
     public int populataionSize = 150;
