@@ -1,6 +1,7 @@
 package test.mutation;
 
 import base.Population;
+import base.Tour;
 import org.junit.Test;
 import test.AbstractTest;
 
@@ -15,8 +16,8 @@ public class HeuristicMutationTest extends AbstractTest{
         HeuristicMutation test = new HeuristicMutation();
         Population testPopulation = new Population();
         testPopulation.generateRandom();
-      //  test.executeMutation(testPopulation);
-
+        Tour myTestTour = testPopulation.getTours().get(0);
+        test.doMutation( myTestTour);
     }
 
 }

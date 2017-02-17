@@ -5,48 +5,52 @@ import base.Tour;
 import random.MersenneTwisterFast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HeuristicMutation implements IMutation {
-    double mutationRatio = 0.001;
     MersenneTwisterFast randomGen = new MersenneTwisterFast();
+    static ArrayList<ArrayList<Integer>> listOfList = new ArrayList<>();
 
-    public int recursiveNumber(int n){
-        if(n == 1) return 1;
-        return recursiveNumber(n-1) * n;
-    }
 
     public Tour doMutation(Tour tour) {
-        // Lambda has the max. value of 10
+
+        // Lambda has the max. value of 5 for testing
         int lambda = randomGen.nextInt(10);
+        double fitnessValue = 0;
         ArrayList<Integer> indizes = new ArrayList<>();
         for(int i = 0; i < lambda; i++) {
             indizes.add(randomGen.nextInt(tour.getSize()-1));
         }
+        Tour tourDummy = tour;
+        Tour bestTour = new Tour();
+        listOfList.clear();
         permute(indizes,0);
-        return null;
+        System.out.println(listOfList.toString());
+        for(ArrayList<Integer> list : listOfList ){
+            for(int i = 0; i < (list.size()/2); i++) {
+                Collections.swap(tourDummy.getCities(),list.get(i),list.get(i++));
+            }
+            if(tourDummy.getFitness() > fitnessValue) {
+                fitnessValue = tourDummy.getFitness();
+                bestTour = tourDummy;
+            }
+            tourDummy = tour;
+        }
+        System.out.println("Die beste Tour :"+bestTour.toString());
+        return bestTour;
     }
-    static void permute(java.util.List<Integer> arr, int k){
+    static void permute(ArrayList<Integer> arr, int k){
         for(int i = k; i < arr.size(); i++){
             java.util.Collections.swap(arr, i, k);
             permute(arr, k+1);
             java.util.Collections.swap(arr, k, i);
         }
         if (k == arr.size() -1){
-            System.out.println(java.util.Arrays.toString(arr.toArray()));
+            ArrayList<Integer> dummy = new ArrayList<>(arr);
+            listOfList.add(dummy);
         }
     }
-    public Population executeMutation(Population popu) {
-        popu = new Population();
-        popu.generateRandom();
-        System.out.println(popu.toString());
-        for(Tour tour : popu.getTours()){
-            double randomNumber = randomGen.nextDouble(true,true);
-            if(randomNumber <= mutationRatio){
-                doMutation(tour);
-            }
-        }
-        return popu;
-    }
+
     public String toString() {
         return getClass().getSimpleName();
     }
