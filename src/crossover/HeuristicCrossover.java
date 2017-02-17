@@ -14,10 +14,12 @@ public class HeuristicCrossover implements ICrossover {
 		tourChild.addCity(tour01.getCity(t1));
 
 		while (tourChild.getCities().size() != tour01.getCities().size()) {
-			if (t2 >= tour02.getSize() - 1)
+			if (t2 >= tour02.getSize() - 1) {
 				t2 = 0;
-			if (t1 >= tour02.getSize() - 1)
+			}
+			if (t1 >= tour02.getSize() - 1) {
 				t1 = 0;
+			}
 			double distance01 = Tour.euclideanDistance(tour01.getCity(t1).getX(), tour01.getCity(t1).getY(),
 					tour01.getCity(t1 + 1).getX(), tour01.getCity(t1 + 1).getY());
 			double distance02 = Tour.euclideanDistance(tour02.getCity(t2).getX(), tour02.getCity(t2).getY(),
@@ -25,8 +27,17 @@ public class HeuristicCrossover implements ICrossover {
 
 			if (distance01 < distance02) {
 				t1 = t1 + 1;
+				System.out.println(tourChild);
+				System.out.println(tour01.getCity(t1));
 				if (tourChild.containsCity(tour01.getCity(t1))) {
-					t1 = gibZufall(nonce, tour01.getSize() - 2);
+					System.out.println("if");
+					if (tourChild.containsCity(tour02.getCity(t2+1))) {
+						System.out.println("if2");
+						t1 = gibZufall(nonce, tour01.getSize() - 2);
+					} else {
+						tourChild.addCity(tour02.getCity(t2));
+						t1 = tour01.getCities().indexOf(tour02.getCity(t2));
+					}
 				} else {
 					tourChild.addCity(tour01.getCity(t1));
 					t2 = tour02.getCities().indexOf(tour01.getCity(t1));
@@ -34,7 +45,11 @@ public class HeuristicCrossover implements ICrossover {
 			} else if (distance01 > distance02) {
 				t2 = t2 + 1;
 				if (tourChild.containsCity(tour02.getCity(t2))) {
-					t1 = gibZufall(nonce, tour01.getSize() - 2);
+					if (tourChild.containsCity(tour01.getCity(t1+1))) {
+						t1 = gibZufall(nonce, tour01.getSize() - 2);
+					} else {
+						tourChild.addCity(tour01.getCity(t1));
+					}
 				} else {
 					tourChild.addCity(tour02.getCity(t2));
 					t1 = tour01.getCities().indexOf(tour02.getCity(t2));
@@ -48,9 +63,8 @@ public class HeuristicCrossover implements ICrossover {
 					tourChild.addCity(tour02.getCity(t2));
 			}
 		}
-	
 
-	return tourChild;
+		return tourChild;
 
 	}
 
@@ -60,6 +74,7 @@ public class HeuristicCrossover implements ICrossover {
 			ret = Configuration.instance.randomSeed.nextInt(max);
 		} while (d.contains(ret));
 		d.add(ret);
+		System.out.println("Zufallszahl:" + ret);
 		return ret;
 	}
 
@@ -69,6 +84,6 @@ public class HeuristicCrossover implements ICrossover {
 
 	@Override
 	public Tour[] doCrossover(Tour tour01, Tour tour02) {
-		return new Tour[]{doSingleCrossover(tour01, tour02), doSingleCrossover(tour02, tour01)};
+		return new Tour[] { doSingleCrossover(tour01, tour02), doSingleCrossover(tour02, tour01) };
 	}
 }

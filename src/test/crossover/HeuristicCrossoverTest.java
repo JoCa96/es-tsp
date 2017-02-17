@@ -37,6 +37,7 @@ public class HeuristicCrossoverTest extends AbstractTest{
 		for (City c : tk[1].getCities()) {
 			tmp.put(c, c);
 		}
+		System.out.println(tmp);
 		if (tmp.size() != tk[1].getSize())
 			fail("Nicht alle Elemente vorhanden");
 		for (int i = 0; i < tk[1].getCities().size(); i++) {
