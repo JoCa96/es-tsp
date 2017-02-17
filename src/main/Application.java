@@ -1,8 +1,7 @@
 package main;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import base.City;
+
 import base.Population;
 import crossover.ICrossover;
 import data.HSQLDBManager;
