@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import base.Pair;
 import org.junit.Test;
 
 import base.City;
@@ -20,27 +21,27 @@ public class CycleCrossoverTest extends AbstractTest {
 		Tour t2 = Tour.generateRandom();
 		System.out.println(t1);
 		System.out.println(t2);
-		Tour[] tk = new CycleCrossover().doCrossover(t1, t2);
-		System.out.println(tk[0]);
-		System.out.println(tk[1]);
+		Pair<Tour, Tour> tk = new CycleCrossover().doCrossover(t1, t2);
+		System.out.println(tk.getFirst());
+		System.out.println(tk.getSecond());
 		HashMap<City, City> tmp = new HashMap<City, City>();
-		for (City c : tk[0].getCities()) {
+		for (City c : tk.getFirst().getCities()) {
 			tmp.put(c, c);
 		}
-		if (tmp.size() != tk[0].getSize())
+		if (tmp.size() != tk.getFirst().getSize())
 			fail("Not all elements available!");
-		for (int i = 0; i < tk[0].getCities().size(); i++) {
-			if (!tk[0].getCity(i).equals(t1.getCity(i))) {
+		for (int i = 0; i < tk.getFirst().getCities().size(); i++) {
+			if (!tk.getFirst().getCity(i).equals(t1.getCity(i))) {
 				return;
 			}
 		}
-		for (City c : tk[1].getCities()) {
+		for (City c : tk.getFirst().getCities()) {
 			tmp.put(c, c);
 		}
-		if (tmp.size() != tk[1].getSize())
+		if (tmp.size() != tk.getSecond().getSize())
 			fail("Not all elements available!");
-		for (int i = 0; i < tk[1].getCities().size(); i++) {
-			if (!tk[1].getCity(i).equals(t1.getCity(i))) {
+		for (int i = 0; i < tk.getSecond().getCities().size(); i++) {
+			if (!tk.getSecond().getCity(i).equals(t1.getCity(i))) {
 				return;
 			}
 		}

@@ -1,5 +1,6 @@
 package test.selection;
 
+import base.Pair;
 import base.Population;
 import base.Tour;
 import junit.framework.TestCase;
@@ -9,6 +10,7 @@ import random.MersenneTwisterFast;
 import selection.ISelection;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TournamentSelection extends TestCase {
     public void setUp() throws Exception {
@@ -25,17 +27,18 @@ public class TournamentSelection extends TestCase {
         Population population = new Population();
         ISelection selector = new selection.TournamentSelection(new MersenneTwisterFast());
         population.generateRandom();
-        Tour[][] winners = selector.doSelection(population);
+        List<Pair<Tour, Tour>> winners = selector.doSelection(population);
         ArrayList<Tour> all = new ArrayList<>();
         //Check correct Length
-        assertEquals(winners.length, 25);
+        int arrayLength = (int) (Configuration.instance.populataionSize * (Configuration.instance.tourBorder * 0.01));
+        if (arrayLength % 2 != 0) arrayLength = (arrayLength + 1) / 2;
+        assertEquals(winners.size(), arrayLength);
         //Check correct internal array length and not null of all elements
-        for (Tour[] winner : winners) {
-            assertEquals(winner.length, 2);
-            assertNotNull(winner[0]);
-            assertNotNull(winner[1]);
-            all.add(winner[0]);
-            all.add(winner[1]);
+        for (Pair<Tour, Tour> winner : winners) {
+            assertNotNull(winner.getFirst());
+            assertNotNull(winner.getSecond());
+            all.add(winner.getFirst());
+            all.add(winner.getSecond());
         }
         //Check unique
         this.checkUnique(all);

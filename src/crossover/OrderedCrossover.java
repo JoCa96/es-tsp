@@ -1,13 +1,14 @@
 package crossover;
 
 import base.City;
+import base.Pair;
 import base.Tour;
 import main.Configuration;
 
 import java.util.*;
 
 public class OrderedCrossover implements ICrossover {
-    public Tour[] doCrossover(Tour tour01, Tour tour02) {
+    public Pair<Tour, Tour> doCrossover(Tour tour01, Tour tour02) {
         List<City> tour1cities = tour01.getCities();
         List<City> tour2cities = tour02.getCities();
 
@@ -22,10 +23,10 @@ public class OrderedCrossover implements ICrossover {
         List<City> middle1 = tour1cities.subList(seperatorBegin, seperatorEnd);
         List<City> middle2 = tour1cities.subList(seperatorBegin, seperatorEnd);
 
-        return new Tour[] {
+        return new Pair<Tour, Tour>(
                 mergeTour(tour2cities, middle1, middle2, seperatorBegin, seperatorEnd),
                 mergeTour(tour1cities, middle2, middle1, seperatorBegin, seperatorEnd)
-        };
+        );
     }
 
     public Tour mergeTour(List<City> partnerCities, List<City> middle1, List<City> middle2, int seperatorBegin, int seperatorEnd) {

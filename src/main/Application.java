@@ -1,9 +1,13 @@
 package main;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
+import base.Pair;
 import base.Population;
-import crossover.ICrossover;
+import base.Tour;
+import crossover.*;
 import data.HSQLDBManager;
 import data.InstanceReader;
 import data.TSPLIBReader;
@@ -73,7 +77,7 @@ public class Application {
 
     public void execute() {
         System.out.println("--- GeneticAlgorithm.execute()");
-        HSQLDBManager.instance.insert("hello world");
+        //HSQLDBManager.instance.insert("hello world");
 
         Population population = new Population();
 
@@ -88,7 +92,50 @@ public class Application {
                 break;
         }
 
-        selection.doSelection(population);
+        ICrossover crossover;
+        switch (Configuration.instance.executionMode.crossoverMode) {
+            case CYCLE:
+                crossover = new CycleCrossover();
+                break;
+            case HEURISTIC:
+                crossover = new HeuristicCrossover();
+                break;
+            case ORDERED:
+                crossover = new OrderedCrossover();
+                break;
+            case PARTIALLY_MATCH:
+                crossover = new PartiallyMatchedCrossover();
+                break;
+            case POSITION_BASED:
+                crossover = new PositionBasedCrossover();
+                break;
+            case RANDOM:
+                crossover = new RandomCrossover();
+                break;
+            default:
+                crossover = new SubTourExchangeCrossover();
+                break;
+        }
+
+
+        for (int i = 0; i < Configuration.instance.maxIterations; i++) {
+            List<Tour> children = new ArrayList<Tour>();
+            children.clear();
+            List<Pair<Tour, Tour>> selectedPopulation = selection.doSelection(population);
+            
+
+            for (Pair<Tour, Tour> pair : selectedPopulation) {
+                Pair<Tour, Tour> newChildren = crossover.doCrossover(pair.getFirst(), pair.getSecond());
+                children.add(newChildren.getFirst());
+                children.add(newChildren.getSecond());
+            }
+
+            // TODO Motate
+
+            population.addChildren(children);
+
+            System.out.println(children.size());
+        }
     }
 
     public static void main(String... args) {
