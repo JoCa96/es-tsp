@@ -35,7 +35,12 @@ public class PartiallyMatchedCrossover implements ICrossover {
 	    
 		ArrayList<City> child = new ArrayList<City>();
 		
+		for (int i = 0; i < parent.size(); i++) {
+			child.add(null);
+		}
+		
 		for (int i = 0; i < middle.size(); i++){
+			child.get(splitStart +i);
 			child.set(splitStart + i, middle.get(i));
 		}
 		
@@ -50,8 +55,11 @@ public class PartiallyMatchedCrossover implements ICrossover {
 				int indexInChild = child.indexOf(input);
 				input = parent.get(indexInChild);
 			}
+			
+			child.set(j, input);
 		}
 		
+		System.err.println(child.size());
 		return new Tour(child);
 	}
 	
