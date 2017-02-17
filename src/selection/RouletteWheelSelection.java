@@ -12,30 +12,31 @@ import random.MersenneTwisterFast;
 public class RouletteWheelSelection implements ISelection {
 
     private MersenneTwisterFast mersenneTwisterFast;
-    private double totalFitness = 0, totalProbability = 0;
-    private int totalTours = 0, tourCount = 0;
-    private ArrayList<Double> probability = new ArrayList<>();
-    private ArrayList<Double> border = new ArrayList<>();
-    private List<Pair<Tour, Tour>> selectedTours = new ArrayList<>();
-    private Tour tempTour = null;
 
     public RouletteWheelSelection(MersenneTwisterFast mersenneTwisterFast) {
         this.mersenneTwisterFast = mersenneTwisterFast;
     }
 
     public List<Pair<Tour, Tour>> doSelection(Population population) {
-
+        double totalFitness = 0;
+        int totalTours = 0, tourCount = 0;
+        ArrayList<Double> probability = new ArrayList<>();
+        ArrayList<Double> border = new ArrayList<>();
+        List<Pair<Tour, Tour>> selectedTours = new ArrayList<>();
+        Tour tempTour = null;
         ArrayList<Tour> tours = population.getTours();
 
-        tours.forEach(tour -> {
+        for (Tour tour : tours) {
             totalFitness += tour.getFitness();
-            totalTours++;
-        });
+        }
 
-        tours.forEach(tour -> probability.add(Math.round(tour.getFitness() / totalFitness*10000000000.0)/10000000000.0));
+        totalTours = Configuration.instance.populataionSize;
+
+        for (Tour tour : tours) {
+            probability.add(Math.round(tour.getFitness() / totalFitness*10000000000.0)/10000000000.0);
+        }
 
         for(int i = 0; i < probability.size(); i++) {
-            totalProbability += probability.get(i);
             if(i == 0) {
                 border.add(probability.get(i));
             } else {
@@ -51,12 +52,14 @@ public class RouletteWheelSelection implements ISelection {
             for(int i = 0; i < border.size(); i++) {
                 if(i == 0) {
                     if(0 < selector && selector <= border.get(i)) {
-                        putTour(tours.get(i), j);
+                        if((j%2) == 0) tempTour = tours.get(i);
+                        else selectedTours.add(new Pair<>(tempTour, tours.get(i)));
                         break;
                     }
                 } else {
                     if(border.get(i-1) < selector && selector <= border.get(i)) {
-                        putTour(tours.get(i), j);
+                        if((j%2) == 0) tempTour = tours.get(i);
+                        else selectedTours.add(new Pair<>(tempTour, tours.get(i)));
                         break;
                     }
                 }
@@ -64,11 +67,6 @@ public class RouletteWheelSelection implements ISelection {
         }
 
         return selectedTours;
-    }
-
-    private void putTour(Tour tour, int j) {
-        if((j%2) == 0) tempTour = tour;
-        else selectedTours.add(new Pair<>(tempTour, tour));
     }
 
     public String toString() {
