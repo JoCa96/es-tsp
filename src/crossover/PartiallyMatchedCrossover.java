@@ -59,7 +59,6 @@ public class PartiallyMatchedCrossover implements ICrossover {
 			child.set(j, input);
 		}
 		
-		System.err.println(child.size());
 		return new Tour(child);
 	}
 	
