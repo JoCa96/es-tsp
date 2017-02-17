@@ -19,27 +19,27 @@ public class Bruteforce {
         this.instReader = y;
     }
 
-    private ArrayList<City> generateCityList(){
+    private void generateCityList(){ //arraylist
 
     }
 
-    private Tour tryTour(){
+    private void tryTour(){
 
     }
 
-    public double getFitnessAll(){
+    public void getFitnessAll(){ //double
 
     }
 
-    public double getFitnessTop25(){
+    public void getFitnessTop25(){ //double
 
     }
 
-    public double getFitnessLast25(){
+    public void getFitnessLast25(){ //double
 
     }
 
-    public double getFitnessMid50(){
+    public void getFitnessMid50(){ //double
 
     }
 
