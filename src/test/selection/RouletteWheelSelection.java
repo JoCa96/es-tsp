@@ -1,5 +1,6 @@
 package test.selection;
 
+import base.Pair;
 import base.Population;
 import base.Tour;
 import main.Application;
@@ -7,6 +8,9 @@ import main.Configuration;
 import org.junit.Test;
 import random.MersenneTwisterFast;
 import selection.ISelection;
+
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class RouletteWheelSelection {
@@ -17,20 +21,19 @@ public class RouletteWheelSelection {
         Population population = new Population();
         ISelection selector = new selection.TournamentSelection(new MersenneTwisterFast());
         population.generateRandom();
-        //Tour[][] tours = selector.doSelection(population);
-        /*
-        int arrayLength = (int)(Configuration.instance.populataionSize / (Configuration.instance.tourBorder*0.01));
+        List<Pair<Tour, Tour>> tourPairs = selector.doSelection(population);
+
+        int arrayLength = (int)(Configuration.instance.populataionSize * (Configuration.instance.tourBorder*0.01));
         if(arrayLength%2 != 0) arrayLength++;
 
-        // Array length test
-        assertEquals(arrayLength, tours.length);
+        // List length Test
+        assertEquals(arrayLength/2, tourPairs.size());
 
-        // Internal Array Test
-        for (Tour[] tour : tours) {
-            assertEquals(2, tour.length);
-            assertNotNull(tour[0]);
-            assertNotNull(tour[1]);
-        }
-        */
+        // Internal List Test
+        tourPairs.forEach(pair -> {
+            assertNotNull(pair.getFirst());
+            assertNotNull(pair.getSecond());
+        });
+
     }
 }

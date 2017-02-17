@@ -19,14 +19,13 @@ public class SubTourExchangeCrossoverTest extends AbstractTest{
 
         Pair<Tour, Tour> testresult = new SubTourExchangeCrossover().doCrossover(tour01, tour02);
 
-        System.out.println("Kind 1:     "+ testresult.getFirst());
-        System.out.println("Kind 2:     "+ testresult.getSecond());
-
-        Boolean equal = false;
-        int index = 0;
-
         Tour child01 = testresult.getFirst();
         Tour child02 = testresult.getSecond();
+
+        System.out.println("Kind 1:     "+ child01);
+        System.out.println("Kind 2:     "+ child02);
+        Boolean equal = false;
+        int index = 0;
 
         if(child01.getSize() != tour01.getSize() || child02.getSize() != tour02.getSize())
         {

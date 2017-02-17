@@ -77,7 +77,7 @@ public class Application {
 
     public void execute() {
         System.out.println("--- GeneticAlgorithm.execute()");
-        HSQLDBManager.instance.insert("hello world");
+        //HSQLDBManager.instance.insert("hello world");
 
         Population population = new Population();
 
