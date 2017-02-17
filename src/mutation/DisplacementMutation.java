@@ -9,12 +9,14 @@ import java.util.List;
 
 public class DisplacementMutation implements IMutation {
 
-    private int arrLenght, ran1,ran2,diff;
-    private MersenneTwisterFast twist;
+    private int arrLenght, ran1,ran2,ran3,diff;
+
     private City[] arrMid,arrBound,tourArray;
 
-    public DisplacementMutation(MersenneTwisterFast twist) {
-        this.twist = twist;
+    public DisplacementMutation(int pran1, int pran2, int pran3){
+        ran1 = pran1;
+        ran2 = pran2;
+        ran3 = pran3;
     }
 
     public Tour doMutation(Tour tour) {
@@ -22,8 +24,8 @@ public class DisplacementMutation implements IMutation {
         arrLenght = tour.getCities().toArray().length;
         tourArray = new City[arrLenght];
         tour.getCities().toArray(tourArray);
-        ran1 = twist.nextInt(arrLenght);
-        ran2 = twist.nextInt(arrLenght);
+
+
         if(ran1>ran2)
         {
             int chache;
@@ -33,6 +35,8 @@ public class DisplacementMutation implements IMutation {
         }
 
         diff = ran2-ran1;
+        arrMid = new City[diff];
+        arrBound = new City[tourArray.length-diff];
 
         //Copy bounds in Array
         for(int x=0;x<ran1;x++)
@@ -41,32 +45,31 @@ public class DisplacementMutation implements IMutation {
         }
         for(int x=0;x<arrLenght-ran2;x++)
         {
-            arrBound[x+ran1] = tourArray[ran2+x+1];
+            arrBound[x+ran1] = tourArray[ran2+x];
         }
 
         //Copy mid in Array
-        for(int i=0;i<=diff;i++)
+        for(int i=0;i<diff;i++)
         {
            arrMid[i] = tourArray[ran1+i];
         }
 
-        ran1 = twist.nextInt(arrBound.length);
 
-        for(int i=0;i<=ran1;i++)
+        for(int i=0;i<ran3;i++)
         {
             tourArray[i]= arrBound[i];
         }
-        
+
         int count =0;
         for (City city : arrMid)
         {
-          tourArray[count+ran1] = city;
+          tourArray[count+ran3] = city;
           count++;
         }
 
-        for(int i=0;i<arrBound.length-ran1;i++)
+        for(int i=0;i<(arrBound.length-ran3);i++)
         {
-            tourArray[ran1+arrMid.length+i] = arrMid[ran1+i+1];
+            tourArray[ran1+arrMid.length+i+1] = arrBound[ran3+i];
         }
 
         ArrayList mutList = new ArrayList<City>();
@@ -78,6 +81,8 @@ public class DisplacementMutation implements IMutation {
 
         return tour;
     }
+
+
 
     public String toString() {
         return getClass().getSimpleName();
