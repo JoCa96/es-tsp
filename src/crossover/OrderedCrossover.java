@@ -4,42 +4,40 @@ import base.City;
 import base.Tour;
 import main.Configuration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class OrderedCrossover implements ICrossover {
     public Tour[] doCrossover(Tour tour01, Tour tour02) {
         List<City> tour1cities = tour01.getCities();
         List<City> tour2cities = tour02.getCities();
 
-        int seperatorBegin = Configuration.instance.randomSeed.nextInt(tour1cities.size());
-        int seperatorEnd = Configuration.instance.randomSeed.nextInt(tour1cities.size());
+        int seperatorBegin = Configuration.instance.randomSeed.nextInt(tour1cities.size() - 1) + 1;
+        int seperatorEnd = Configuration.instance.randomSeed.nextInt(tour1cities.size() - 1) + 1;
         if (seperatorEnd < seperatorBegin) {
             int tmp = seperatorBegin;
             seperatorBegin = seperatorEnd;
             seperatorEnd = tmp;
         }
 
-        List<City> part1 = tour1cities.subList(seperatorBegin, seperatorEnd);
-        List<City> part2 = tour1cities.subList(seperatorBegin, seperatorEnd);
+        List<City> middle1 = tour1cities.subList(seperatorBegin, seperatorEnd);
+        List<City> middle2 = tour1cities.subList(seperatorBegin, seperatorEnd);
 
         return new Tour[] {
-                mergeTour(tour2cities, part1, part2, seperatorBegin, seperatorEnd),
-                mergeTour(tour1cities, part2, part1, seperatorBegin, seperatorEnd)
+                mergeTour(tour2cities, middle1, middle2, seperatorBegin, seperatorEnd),
+                mergeTour(tour1cities, middle2, middle1, seperatorBegin, seperatorEnd)
         };
     }
 
-    public Tour mergeTour(List<City> prtnerCities, List<City> part1, List<City> part2, int seperatorBegin, int seperatorEnd) {
-        ArrayList<City> childCities = new ArrayList<City>();
-        for (int i = 0; i < part1.size(); i++) {
-            childCities.set(seperatorBegin + i, part1.get(0));
+    public Tour mergeTour(List<City> partnerCities, List<City> middle1, List<City> middle2, int seperatorBegin, int seperatorEnd) {
+        ArrayList<City> childCities = new ArrayList<City>(Collections.nCopies(partnerCities.size(), null));
+
+        for (int i = 0; i < middle1.size(); i++) {
+            childCities.set(seperatorBegin + i, middle1.get(i));
         }
 
-        ArrayList<City> others = new ArrayList<City>(part2);
-        others.addAll(prtnerCities.subList(0, seperatorBegin));
-        others.addAll(prtnerCities.subList(seperatorEnd, prtnerCities.size()));
+        ArrayList<City> others = new ArrayList<City>(middle2);
+        others.addAll(partnerCities.subList(0, seperatorBegin));
+        others.addAll(partnerCities.subList(seperatorEnd, partnerCities.size()));
 
         int index = 0;
         Iterator<City> iterator = others.iterator();
