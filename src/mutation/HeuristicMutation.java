@@ -1,6 +1,5 @@
 package mutation;
 
-import base.Population;
 import base.Tour;
 import random.MersenneTwisterFast;
 
