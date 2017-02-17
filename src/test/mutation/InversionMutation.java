@@ -6,6 +6,7 @@ import random.MersenneTwisterFast;
 import java.util.Collections;
 
 public class InversionMutation {
+    // For Test case the random part is cut out and lower and upperBorder are given
     public Tour doMutation(Tour tour,int lowerBorder,int upperBorder) {
       /*  MersenneTwisterFast randomGenerator = new MersenneTwisterFast();
         int lowerBorder= randomGenerator.nextInt((tour.getSize()-2));
