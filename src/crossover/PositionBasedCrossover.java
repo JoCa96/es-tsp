@@ -3,16 +3,14 @@ package crossover;
 
 import java.util.ArrayList;
 import base.City;
+import base.Pair;
 import base.Tour;
 import main.Configuration;
 
 
 public class PositionBasedCrossover implements ICrossover {
-    public Tour[] doCrossover(Tour tour01, Tour tour02) {
-        Tour[] offsprings = new Tour[2];
-        offsprings[0] = doSingleCrossover(tour01,tour02);
-        offsprings[1] = doSingleCrossover(tour02,tour01);
-        return offsprings;
+    public Pair<Tour, Tour> doCrossover(Tour tour01, Tour tour02) {
+        return new Pair<Tour, Tour>(doSingleCrossover(tour01,tour02), doSingleCrossover(tour02,tour01));
     }
 
     private Tour doSingleCrossover(Tour tour01, Tour tour02) {

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.City;
+import base.Pair;
 import base.Tour;
 import main.Configuration;
 
 public class PartiallyMatchedCrossover implements ICrossover {
-    public Tour[] doCrossover(Tour tour01,Tour tour02) {
+    public Pair<Tour, Tour> doCrossover(Tour tour01,Tour tour02) {
 	 
 	    List<City> parent1 = tour01.getCities();
 	    List<City> parent2 = tour02.getCities();
@@ -28,7 +29,7 @@ public class PartiallyMatchedCrossover implements ICrossover {
 	    Tour child1 = createChild(parent1, middleP2, splitStart);
 	    Tour child2 = createChild(parent2, middleP1, splitStart);
 	    
-	    return new Tour[] {child1, child2};
+	    return new Pair<Tour, Tour>(child1, child2);
 	}
 	
 	public Tour createChild(List<City> parent, List<City> middle, int splitStart) {
