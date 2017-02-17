@@ -1,6 +1,7 @@
 package test.crossover;
 
 import base.City;
+import base.Pair;
 import base.Tour;
 import crossover.ICrossover;
 import crossover.OrderedCrossover;
@@ -32,9 +33,9 @@ public class OrderedCrossoverTest extends AbstractTest {
         Tour t2 = generateTour(false);
 
         ICrossover crossover = new OrderedCrossover();
-        Tour[] tours = crossover.doCrossover(t1, t2);
+        Pair<Tour, Tour> tours = crossover.doCrossover(t1, t2);
 
-        assertEquals(tours[0].getCities().size(), tours[1].getCities().size());
-        assertFalse(tours[0] == tours[1]);
+        assertEquals(tours.getFirst().getCities().size(), tours.getSecond().getCities().size());
+        assertFalse(tours.getFirst() == tours.getSecond());
     }
 }
