@@ -21,7 +21,8 @@ public class CycleCrossoverTest extends AbstractTest {
 		System.out.println(t1);
 		System.out.println(t2);
 		Tour[] tk = new CycleCrossover().doCrossover(t1, t2);
-		System.out.println(tk);
+		System.out.println(tk[0]);
+		System.out.println(tk[1]);
 		HashMap<City, City> tmp = new HashMap<City, City>();
 		for (City c : tk[0].getCities()) {
 			tmp.put(c, c);
