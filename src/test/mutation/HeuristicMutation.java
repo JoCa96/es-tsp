@@ -14,30 +14,40 @@ public class HeuristicMutation  extends AbstractTest{
     MersenneTwisterFast randomGen = new MersenneTwisterFast();
     static ArrayList<ArrayList<Integer>> listOfList = new ArrayList<>();
 
-    public Tour doMutation(Tour tour) {
-
-        // Lambda has the max. value of 5 for testing
-        int lambda = randomGen.nextInt(5);
-        double fitnessValue = 0;
-        ArrayList<Integer> indizes = new ArrayList<>();
-        for(int i = 0; i < lambda; i++) {
-            indizes.add(randomGen.nextInt(tour.getSize()-1));
+    public Tour tourCopy(Tour tour){
+        Tour tourDummy = new Tour();
+        for(int i = 0; i < tour.getCities().size(); i++){
+            tourDummy.addCity(tour.getCity(i));
         }
-        Tour tourDummy = tour;
-        Tour bestTour = new Tour();
+        return tourDummy;
+    }
+
+    public Tour doMutation(Tour tour,int howMany, ArrayList<Integer> index) {
+
+        // Lambda is fixed in test
+        int lambda = howMany;
+        double fitnessValue = tour.getFitness();
+        // So is the list of indizes
+        ArrayList<Integer> indizes = index;
+
+        Tour tourDummy = tourCopy(tour);
+        Tour bestTour = tourCopy(tour);
         listOfList.clear();
         permute(indizes,0);
-        System.out.println(listOfList.toString());
         for(ArrayList<Integer> list : listOfList ){
             for(int i = 0; i < (list.size()/2); i++) {
-                    Collections.swap(tourDummy.getCities(),list.get(i),list.get(i++));
+                    int indexOne = list.get(i);
+                    int indexTwo = list.get(++i);
+                    Collections.swap(tourDummy.getCities(),indexOne,indexTwo);
             }
+            System.out.println("Fitness :"+tourDummy.getFitness()+" in this Order :"+tourDummy.toString());
             if(tourDummy.getFitness() > fitnessValue) {
                 fitnessValue = tourDummy.getFitness();
-                bestTour = tourDummy;
+                bestTour = tourCopy(tourDummy);
             }
-            tourDummy = tour;
+            tourDummy = tourCopy(tour);
         }
+
         System.out.println("Die beste Tour :"+bestTour.toString());
         return bestTour;
     }
