@@ -31,6 +31,10 @@ public class TournamentSelection implements ISelection {
                 groupCount = this.calculateGroupCount(populationSize, selectionPercentage),
                 pairCount = groupCount / 2;
         /*
+            Check Plausiblity
+        */
+        groupSize = this.checkGroupSize(groupSize, groupCount, populationSize);
+        /*
             Select a pool of challenger
         */
         int randomSelect;
@@ -63,8 +67,18 @@ public class TournamentSelection implements ISelection {
         return winners;
     }
 
+    private int checkGroupSize(int groupSize, int groupCount, int populationSize) {
+        if ((groupSize * groupCount) > populationSize) {
+            int newSize = populationSize / groupCount;
+            System.out.println("Set group-sizes were to big and were changed to " + newSize + "!!!");
+            System.out.println("Please check your configuration!");
+            return newSize;
+        }
+        return groupSize;
+    }
+
     private int calculateGroupCount(int length, int percentage) {
-        int groupCount = (int)(length * (percentage * 0.01));
+        int groupCount = (int) (length * (percentage * 0.01));
         if (groupCount % 2 == 1) groupCount++;                      //Check if straight and increment
         return groupCount;
     }
