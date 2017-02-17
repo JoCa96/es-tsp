@@ -1,6 +1,7 @@
 package main;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import base.Pair;
@@ -111,14 +112,18 @@ public class Application {
             case RANDOM:
                 crossover = new RandomCrossover();
                 break;
-            case SUB_TOUR_EXCHANGER:
+            default:
                 crossover = new SubTourExchangeCrossover();
                 break;
         }
 
+        List<Tour> children = new ArrayList<Tour>();
+
         List<Pair<Tour, Tour>> selectedPopulation = selection.doSelection(population);
         for (Pair<Tour, Tour> pair : selectedPopulation) {
-
+            Pair<Tour, Tour> newChildren = crossover.doCrossover(pair.getFirst(), pair.getSecond());
+            children.add(newChildren.getFirst());
+            children.add(newChildren.getSecond());
         }
     }
 
