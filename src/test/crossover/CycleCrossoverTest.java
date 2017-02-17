@@ -13,10 +13,14 @@ import crossover.CycleCrossover;
 public class CycleCrossoverTest {
 
 	@Test
-	public void test() {
+	public void testDoCrossover() {
+		System.out.println("Starte Test CycleCrossover");
 		Tour t1=Tour.generateRandom();
 		Tour t2=Tour.generateRandom();
+		System.out.println(t1);
+		System.out.println(t2);
 		Tour tk=new CycleCrossover().doCrossover(t1, t2);
+		System.out.println(tk);
 		HashMap<City, City> tmp = new HashMap<City, City>();
 		for(City c: tk.getCities())
 		{

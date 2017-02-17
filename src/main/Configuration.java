@@ -17,9 +17,9 @@ public enum Configuration {
 
     public String databaseFile = dataDirectory + "datastore.db";
 
-    public Random randomSeed = new MersenneTwisterFast(System.currentTimeMillis());
+    public Random randomSeed = new MersenneTwisterFast(4/*Decided by fair dice roll*/);//System.currentTimeMillis());
 
-    public ArrayList<City> availableCities;
+    public ArrayList<City> availableCities=new ArrayList<City>();
     public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
 
     public int populataionSize = 150;
