@@ -88,7 +88,7 @@ public class Tour implements Comparable<Tour> {
 		for (City c : Configuration.instance.availableCities) {
 			cities.add(c);
 		}
-		Collections.shuffle(cities);
+		Collections.shuffle(cities, Configuration.instance.randomSeed);
 
 		return new Tour(cities);
 	}
