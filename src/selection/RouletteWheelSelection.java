@@ -33,7 +33,6 @@ public class RouletteWheelSelection implements ISelection {
 
         for(int i = 0; i < probability.size(); i++) {
             totalProbability += probability.get(i);
-            System.out.println(totalProbability);
             if(i == 0) {
                 border.add(probability.get(i));
             } else {
@@ -49,12 +48,14 @@ public class RouletteWheelSelection implements ISelection {
             double selector = mersenneTwisterFast.nextDouble(true, true);
             for(int i = 0; i < border.size(); i++) {
                 if(i == 0) {
-                    if(0 <= selector && selector <= border.get(i)) {
+                    if(0 < selector && selector <= border.get(i)) {
                         selectedTours[j/2][j%2] = tours.get(i);
+                        break;
                     }
                 } else {
                     if(border.get(i-1) < selector && selector <= border.get(i)) {
                         selectedTours[j/2][j%2] = tours.get(i);
+                        break;
                     }
                 }
             }
