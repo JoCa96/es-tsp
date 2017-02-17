@@ -17,7 +17,6 @@ public class CycleCrossoverTest extends AbstractTest {
 	@Test
 	public void testDoCrossover() {
 		System.out.println("Starte Test CycleCrossover");
-		new Application();
 		Tour t1 = Tour.generateRandom();
 		Tour t2 = Tour.generateRandom();
 		System.out.println(t1);
