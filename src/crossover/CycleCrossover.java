@@ -14,20 +14,18 @@ public class CycleCrossover implements ICrossover {
 		int t1 = Configuration.instance.randomSeed.nextInt(tour01.getSize() - 1);
 		cI.add(t1);
 		City t2 = tour02.getCities().get(t1);
-		t1 = tour01.getCities().indexOf(t2);
 
-		while (t1 != cI.get(0)) {
+		for (t1 = tour01.getCities().indexOf(t2); t1 != cI.get(0); t1 = tour01.getCities().indexOf(t2)) {
 			cI.add(t1);
 			t2 = tour02.getCities().get(t1);
-			t1 = tour01.getCities().indexOf(t2);
 		}
 
-		for (final int index : cI) {
-			City tmp=tour01.getCities().get(index);
+		for (int index : cI) {
+			City tmp = tour01.getCities().get(index);
 			tour01.getCities().set(index, tour02.getCities().get(index));
 			tour01.getCities().set(index, tmp);
 		}
-		return tour01;
+		return Configuration.instance.randomSeed.nextBoolean()?tour01:tour02;
 	}
 
 	public String toString() {
