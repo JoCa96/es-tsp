@@ -1,10 +1,10 @@
 package main;
 
-import base.City;
-import random.MersenneTwisterFast;
-
 import java.util.ArrayList;
 import java.util.Random;
+
+import base.City;
+import random.MersenneTwisterFast;
 
 public enum Configuration {
     instance;

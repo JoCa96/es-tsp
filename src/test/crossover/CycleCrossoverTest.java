@@ -9,7 +9,6 @@ import org.junit.Test;
 import base.City;
 import base.Tour;
 import crossover.CycleCrossover;
-import main.Application;
 import test.AbstractTest;
 
 public class CycleCrossoverTest extends AbstractTest {
