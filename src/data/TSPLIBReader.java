@@ -1,6 +1,7 @@
 package data;
 
 import java.util.ArrayList;
+
 import base.City;
 
 public class TSPLIBReader {

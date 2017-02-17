@@ -1,6 +1,7 @@
 package test.data;
 
-/*
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import data.InstanceReader;
@@ -15,4 +16,3 @@ public class TSPLIBReader {
         assertEquals(280,tspLibReader.getCities().size());
     }
 }
-*/
