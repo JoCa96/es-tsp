@@ -26,4 +26,6 @@ public enum Configuration {
     /*    Selection-Configuration    */
     public int tourBorder = 33; // Number of tours given back by the doSelection method in percent
     public int tournamentGroupSize = 3;   //Number of challengers in a group (Only Tournament Selection)
+
+    public Mode executionMode;
 }

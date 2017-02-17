@@ -1,7 +1,9 @@
 package selection;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import base.Pair;
 import base.Population;
 import base.Tour;
 import main.Configuration;
@@ -20,7 +22,7 @@ public class RouletteWheelSelection implements ISelection {
         this.mersenneTwisterFast = mersenneTwisterFast;
     }
 
-    public Tour[][] doSelection(Population population) {
+    public List<Pair<Tour, Tour>> doSelection(Population population) {
 
         ArrayList<Tour> tours = population.getTours();
 
