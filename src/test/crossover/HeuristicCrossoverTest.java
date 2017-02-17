@@ -15,7 +15,7 @@ public class HeuristicCrossoverTest extends AbstractTest{
 
 	@Test
 	public void testDoCrossover() {
-		System.out.println("HeuristicCrossoverstest start");
+		System.out.println("HeuristicCrossoverstest started.");
 		Tour t1 = Tour.generateRandom();
 		Tour t2 = Tour.generateRandom();
 		System.out.println(t1);
@@ -28,7 +28,7 @@ public class HeuristicCrossoverTest extends AbstractTest{
 			tmp.put(c, c);
 		}
 		if (tmp.size() != tk[0].getSize())
-			fail("Not all elements available");
+			fail("Not all elements available!");
 		for (int i = 0; i < tk[0].getCities().size(); i++) {
 			if (!tk[0].getCity(i).equals(t1.getCity(i))) {
 				return;
@@ -38,7 +38,7 @@ public class HeuristicCrossoverTest extends AbstractTest{
 			tmp.put(c, c);
 		}
 		if (tmp.size() != tk[1].getSize())
-			fail("Not all elements available");
+			fail("Not all elements available!");
 		for (int i = 0; i < tk[1].getCities().size(); i++) {
 			if (!tk[1].getCity(i).equals(t1.getCity(i))) {
 				return;
