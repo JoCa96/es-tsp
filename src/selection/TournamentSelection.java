@@ -6,8 +6,7 @@ import base.Tour;
 import main.Configuration;
 import random.MersenneTwisterFast;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TournamentSelection implements ISelection {
 
@@ -54,7 +53,8 @@ public class TournamentSelection implements ISelection {
         */
         double max;
         int index;
-        Tour[][] winners = new Tour[pairCount][2];
+        Tour tempWinner = null;
+        List<Pair<Tour, Tour>> winners = new ArrayList<>();
         for (int g = 0; g < groupCount; g++) {                          //Iterate over group Count
             max = groups[g][0].getFitness();
             index = 0;
@@ -64,7 +64,11 @@ public class TournamentSelection implements ISelection {
                     index = i;                                          //Save index of new winner
                 }
             }
-            winners[g / 2][g % 2] = groups[g][index];                   //Add winner
+            if ((g % 2) == 0) {
+                tempWinner = groups[g][index];
+            } else {
+                winners.add(new Pair<>(tempWinner, groups[g][index]));
+            }
         }
 
         return winners;
@@ -73,8 +77,8 @@ public class TournamentSelection implements ISelection {
     private int checkGroupSize(int groupSize, int groupCount, int populationSize) {
         if ((groupSize * groupCount) > populationSize) {
             int newSize = populationSize / groupCount;
-            System.out.println("Set group-sizes were to big and were changed to " + newSize + "!!!");
-            System.out.println("Please check your configuration!");
+            System.out.println("TournamentSelection: Set group-sizes were to big and were changed to " + newSize + "!!!");
+            System.out.println("TournamentSelection: Please check your configuration!");
             return newSize;
         }
         return groupSize;
