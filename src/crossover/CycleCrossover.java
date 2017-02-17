@@ -28,9 +28,9 @@ public class CycleCrossover implements ICrossover {
 		for (int index : cI) {
 			City tmp = tour01.getCities().get(index);
 			tour01.getCities().set(index, tour02.getCities().get(index));
-			tour01.getCities().set(index, tmp);
+			tour02.getCities().set(index, tmp);
 		}
-		return Configuration.instance.randomSeed.nextBoolean()?tour01:tour02;
+		return tour01;
 	}
 
 	public String toString() {
