@@ -122,7 +122,6 @@ public class Application {
             List<Tour> children = new ArrayList<Tour>();
             children.clear();
             List<Pair<Tour, Tour>> selectedPopulation = selection.doSelection(population);
-            
 
             for (Pair<Tour, Tour> pair : selectedPopulation) {
                 Pair<Tour, Tour> newChildren = crossover.doCrossover(pair.getFirst(), pair.getSecond());
@@ -133,8 +132,6 @@ public class Application {
             // TODO Motate
 
             population.addChildren(children);
-
-            System.out.println(children.size());
         }
     }
 

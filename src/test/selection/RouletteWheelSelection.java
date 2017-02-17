@@ -16,18 +16,18 @@ import static org.junit.Assert.*;
 public class RouletteWheelSelection {
     @Test
     public void doSelection() throws Exception {
-        for(int i = 0; i < 100; i++) {
-            Application application = new Application();
-            application.loadData();
-            Population population = new Population();
-            ISelection selector = new selection.TournamentSelection(new MersenneTwisterFast());
+        Application application = new Application();
+        application.loadData();
+        Population population = new Population();
+        ISelection selector = new selection.TournamentSelection(new MersenneTwisterFast());
+
+        int arrayLength = (int) (Configuration.instance.populataionSize * (Configuration.instance.tourBorder * 0.01));
+        if (arrayLength % 2 != 0) arrayLength++;
+
+        for(int i = 0; i < Configuration.instance.maxIterations; i++) {
             population.generateRandom();
             List<Pair<Tour, Tour>> tourPairs = selector.doSelection(population);
 
-            int arrayLength = (int) (Configuration.instance.populataionSize * (Configuration.instance.tourBorder * 0.01));
-            if (arrayLength % 2 != 0) arrayLength++;
-
-            // List length Test
             assertEquals(arrayLength / 2, tourPairs.size());
 
             // Internal List Test
@@ -36,7 +36,7 @@ public class RouletteWheelSelection {
                 assertNotNull(pair.getSecond());
             });
 
-            System.out.println(tourPairs.size());
+            System.out.println(i);
         }
     }
 }
