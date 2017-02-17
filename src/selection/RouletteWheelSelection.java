@@ -16,7 +16,8 @@ public class RouletteWheelSelection implements ISelection {
     private int totalTours = 0, tourCount = 0;
     private ArrayList<Double> probability = new ArrayList<>();
     private ArrayList<Double> border = new ArrayList<>();
-    private Tour[][] selectedTours;
+    private List<Pair<Tour, Tour>> selectedTours = new ArrayList<>();
+    private Tour tempTour = null;
 
     public RouletteWheelSelection(MersenneTwisterFast mersenneTwisterFast) {
         this.mersenneTwisterFast = mersenneTwisterFast;
@@ -44,19 +45,18 @@ public class RouletteWheelSelection implements ISelection {
 
         tourCount = (int)((Configuration.instance.tourBorder * 0.01) * totalTours);
         if(tourCount%2 != 0) tourCount++;
-        selectedTours = new Tour[tourCount/2][2];
 
         for(int j = 0; j < tourCount; j++) {
             double selector = mersenneTwisterFast.nextDouble(true, true);
             for(int i = 0; i < border.size(); i++) {
                 if(i == 0) {
                     if(0 < selector && selector <= border.get(i)) {
-                        selectedTours[j/2][j%2] = tours.get(i);
+                        putTour(tours.get(i), j);
                         break;
                     }
                 } else {
                     if(border.get(i-1) < selector && selector <= border.get(i)) {
-                        selectedTours[j/2][j%2] = tours.get(i);
+                        putTour(tours.get(i), j);
                         break;
                     }
                 }
@@ -64,6 +64,11 @@ public class RouletteWheelSelection implements ISelection {
         }
 
         return selectedTours;
+    }
+
+    private void putTour(Tour tour, int j) {
+        if((j%2) == 0) tempTour = tour;
+        else selectedTours.add(new Pair<>(tempTour, tour));
     }
 
     public String toString() {
