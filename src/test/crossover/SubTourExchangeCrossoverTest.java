@@ -37,7 +37,7 @@ public class SubTourExchangeCrossoverTest extends AbstractTest{
         else {
             while (equal==true)
             {
-                if((child01.getCity(index) != tour01.getCity(index))&& child02.getCity(index) != tour02.getCity(index))
+                if((child01.getCity(index) != tour01.getCity(index))|| child02.getCity(index) != tour02.getCity(index))
                     equal = false;
                 else equal = true;
             }
