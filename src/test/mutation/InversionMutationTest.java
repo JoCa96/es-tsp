@@ -5,6 +5,7 @@ import base.Population;
 import base.Tour;
 import main.Configuration;
 import org.junit.Test;
+import test.AbstractTest;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Filip on 16.02.2017.
  */
-public class InversionMutationTest {
+public class InversionMutationTest extends AbstractTest{
     @Test
     public void doMutation() throws Exception {
         Tour myStandardTour = new Tour();
@@ -101,11 +102,10 @@ public class InversionMutationTest {
         myStandardTour.addCity(city6);
         myStandardTour.addCity(city7);
         mutatedTour = myMutation.doMutation(myStandardTour,3,6);
+
         Population pop = new Population();
         pop.generateRandom();
-        for(Tour tour:pop.getTours()){
-            System.out.println(tour.toString());
-        }
+
 
         }
 

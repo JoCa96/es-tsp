@@ -1,6 +1,5 @@
 package mutation;
 
-import base.City;
 import base.Population;
 import base.Tour;
 import random.MersenneTwisterFast;
@@ -21,12 +20,11 @@ public class InversionMutation implements IMutation {
     }
 
     public Population executeMutation(Population popu) {
-        popu = new Population();
-        popu.generateRandom();
         System.out.println(popu.toString());
         MersenneTwisterFast randomGen = new MersenneTwisterFast();
         for(Tour tour : popu.getTours()){
             double randomNumber = randomGen.nextDouble(true,true);
+            System.out.println(randomNumber);
             if(randomNumber <= mutationRatio){
                 doMutation(tour);
             }

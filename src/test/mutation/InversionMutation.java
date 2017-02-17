@@ -1,11 +1,14 @@
 package test.mutation;
 
+import base.Population;
 import base.Tour;
 import random.MersenneTwisterFast;
+import test.AbstractTest;
 
 import java.util.Collections;
 
-public class InversionMutation {
+public class InversionMutation extends AbstractTest{
+    double mutationRatio = 0.001;
     // For Test case the random part is cut out and lower and upperBorder are given
     public Tour doMutation(Tour tour,int lowerBorder,int upperBorder) {
       /*  MersenneTwisterFast randomGenerator = new MersenneTwisterFast();
