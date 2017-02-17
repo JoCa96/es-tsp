@@ -132,6 +132,7 @@ public class Application {
             // TODO Motate
 
             population.addChildren(children);
+            System.out.println(i);
         }
     }
 
