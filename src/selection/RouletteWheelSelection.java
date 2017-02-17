@@ -1,10 +1,10 @@
 package selection;
 
+import java.util.ArrayList;
+
 import base.Population;
 import base.Tour;
 import random.MersenneTwisterFast;
-
-import java.util.ArrayList;
 
 public class RouletteWheelSelection implements ISelection {
 

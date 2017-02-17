@@ -1,8 +1,8 @@
 package base;
 
-import main.Configuration;
-
 import java.util.ArrayList;
+
+import main.Configuration;
 
 public class Population {
     private ArrayList<Tour> tours = new ArrayList<Tour>();

@@ -1,15 +1,47 @@
 package bruteforce;
 
 
-import base.City;
-import data.InstanceReader;
-import data.TSPLIBReader;
-import random.MersenneTwisterFast;
 import java.util.ArrayList;
 
+import data.InstanceReader;
+import data.TSPLIBReader;
+
 public class Bruteforce {
-/*
+
     private TSPLIBReader tspReader;
+    private InstanceReader instReader;
+    private ArrayList<Double> resultList;
+
+    public Bruteforce(TSPLIBReader x, InstanceReader y) {
+        this.tspReader = x;
+        this.instReader = y;
+    }
+
+    private void generateCityList(){ //arraylist
+
+    }
+
+    private void tryTour(){
+
+    }
+
+    public void getFitnessAll(){ //double
+
+    }
+
+    public void getFitnessTop25(){ //double
+
+    }
+
+    public void getFitnessLast25(){ //double
+
+    }
+
+    public void getFitnessMid50(){ //double
+
+    }
+
+   /* private TSPLIBReader tspReader;
     private InstanceReader instReader;
     private int numberOfCities;
     private ArrayList<City> cityList;
@@ -32,12 +64,12 @@ public class Bruteforce {
         }
     }
 
-    public ... run(){
+    public void run(){
         this.getRandomCities();
 
 
     }
 
+    */
 
-*/
 }
