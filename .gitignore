@@ -1,2 +1,4 @@
 /bin/
 data/datastore.db.properties.*
+vcs.xml
+/.idea/
