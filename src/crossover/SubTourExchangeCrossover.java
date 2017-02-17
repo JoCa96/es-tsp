@@ -3,7 +3,6 @@ package crossover;
 import base.Tour;
 import base.City;
 
-import main.Configuration;
 import java.util.*;
 
 // author 1174535

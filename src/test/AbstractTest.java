@@ -1,5 +1,14 @@
 package test;
 
+import static org.junit.Assert.fail;
+
+import java.util.HashMap;
+
+import org.junit.Test;
+
+import base.City;
+import base.Tour;
+import crossover.RandomCrossover;
 import main.Application;
 
 public class AbstractTest {

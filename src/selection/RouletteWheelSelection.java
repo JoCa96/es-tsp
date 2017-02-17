@@ -10,8 +10,8 @@ import random.MersenneTwisterFast;
 public class RouletteWheelSelection implements ISelection {
 
     private MersenneTwisterFast mersenneTwisterFast;
-    private double totalFitness = 0, totalProbability;
-    private int totalTours = 0, tourCount;
+    private double totalFitness = 0, totalProbability = 0;
+    private int totalTours = 0, tourCount = 0;
     private ArrayList<Double> probability = new ArrayList<>();
     private ArrayList<Double> border = new ArrayList<>();
     private Tour[][] selectedTours;
@@ -21,32 +21,23 @@ public class RouletteWheelSelection implements ISelection {
     }
 
     public Tour[][] doSelection(Population population) {
-        /*
-            - Population -> Touren -> Fitnesswerte
-            - Rückgabe von 33% der übergebenen Touren wird in einer ArrayList zurückgeben
-         */
 
         ArrayList<Tour> tours = population.getTours();
 
-        // Gesamtfitness und Anzahl Touren berechnen
         tours.forEach(tour -> {
             totalFitness += tour.getFitness();
             totalTours++;
         });
 
-        System.out.println("Totalfitness: " + totalFitness);
-
-        // Wahrscheinlichkeit einer Tour berechnen
         tours.forEach(tour -> probability.add(Math.round(tour.getFitness() / totalFitness*10000000000.0)/10000000000.0));
-        System.out.println(probability);
 
         for(int i = 0; i < probability.size(); i++) {
-            totalProbability += probability.get(i).doubleValue();
+            totalProbability += probability.get(i);
             System.out.println(totalProbability);
             if(i == 0) {
-                border.add(probability.get(i).doubleValue());
+                border.add(probability.get(i));
             } else {
-                border.add(border.get(i - 1) + probability.get(i).doubleValue());
+                border.add(border.get(i - 1) + probability.get(i));
             }
         }
 
@@ -59,20 +50,17 @@ public class RouletteWheelSelection implements ISelection {
             for(int i = 0; i < border.size(); i++) {
                 if(i == 0) {
                     if(0 <= selector && selector <= border.get(i)) {
-                        System.out.println("Selektierte Tour: " + border.indexOf(border.get(i)));
-
+                        selectedTours[j/2][j%2] = tours.get(i);
                     }
                 } else {
                     if(border.get(i-1) < selector && selector <= border.get(i)) {
-                        System.out.println("Selektierte Tour: " + border.indexOf(border.get(i)));
+                        selectedTours[j/2][j%2] = tours.get(i);
                     }
                 }
             }
         }
 
-        System.out.println("Totalprobability: " + totalProbability);
-
-        return null;
+        return selectedTours;
     }
 
     public String toString() {
