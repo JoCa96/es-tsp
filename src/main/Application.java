@@ -117,13 +117,24 @@ public class Application {
                 break;
         }
 
-        List<Tour> children = new ArrayList<Tour>();
 
-        List<Pair<Tour, Tour>> selectedPopulation = selection.doSelection(population);
-        for (Pair<Tour, Tour> pair : selectedPopulation) {
-            Pair<Tour, Tour> newChildren = crossover.doCrossover(pair.getFirst(), pair.getSecond());
-            children.add(newChildren.getFirst());
-            children.add(newChildren.getSecond());
+        for (int i = 0; i < Configuration.instance.maxIterations; i++) {
+            List<Tour> children = new ArrayList<Tour>();
+            children.clear();
+            List<Pair<Tour, Tour>> selectedPopulation = selection.doSelection(population);
+            
+
+            for (Pair<Tour, Tour> pair : selectedPopulation) {
+                Pair<Tour, Tour> newChildren = crossover.doCrossover(pair.getFirst(), pair.getSecond());
+                children.add(newChildren.getFirst());
+                children.add(newChildren.getSecond());
+            }
+
+            // TODO Motate
+
+            population.addChildren(children);
+
+            System.out.println(children.size());
         }
     }
 
