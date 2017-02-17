@@ -1,7 +1,8 @@
 package crossover;
 
+import base.Pair;
 import base.Tour;
 
 public interface ICrossover {
-    Tour[] doCrossover(Tour tour01,Tour tour02);
+    Pair<Tour, Tour> doCrossover(Tour tour01, Tour tour02);
 }
