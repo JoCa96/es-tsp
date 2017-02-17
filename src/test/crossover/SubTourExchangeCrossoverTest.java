@@ -1,9 +1,10 @@
 package test.crossover;
 
-import base.Tour;
 import org.junit.Test;
+
+import base.Tour;
+import crossover.SubTourExchangeCrossover;
 import test.AbstractTest;
-import main.Configuration;
 
 /**
  * Created by Max on 17.02.2017.
