@@ -57,6 +57,13 @@ public class Application {
     public void initConfiguration() {
         System.out.println("--- GeneticAlgorithm.initConfiguration()");
         System.out.println();
+
+        // TODO Config einlesen.
+
+        Mode executionMode = new Mode();
+        executionMode.selectionMode = Mode.SelectionMode.ROULETTE_WHEEL;
+        executionMode.crossoverMode = Mode.CrossoverMode.CYCLE;
+        executionMode.mutationMode = Mode.MutationMode.DISPLACEMENT;
     }
 
     public void execute() {

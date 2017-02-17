@@ -1,7 +1,6 @@
 package main;
 
-public enum Mode {
-    instance;
+public class Mode {
 
     public SelectionMode selectionMode;
     public CrossoverMode crossoverMode;
