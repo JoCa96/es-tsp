@@ -17,7 +17,7 @@ public class RouletteWheelSelection {
         Population population = new Population();
         ISelection selector = new selection.TournamentSelection(new MersenneTwisterFast());
         population.generateRandom();
-        Tour[][] tours = selector.doSelection(population);
+        //Tour[][] tours = selector.doSelection(population);
         /*
         int arrayLength = (int)(Configuration.instance.populataionSize / (Configuration.instance.tourBorder*0.01));
         if(arrayLength%2 != 0) arrayLength++;
