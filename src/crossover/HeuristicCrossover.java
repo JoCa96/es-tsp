@@ -6,7 +6,7 @@ import base.Tour;
 import main.Configuration;
 
 public class HeuristicCrossover implements ICrossover {
-	public Tour doCrossover(Tour tour01, Tour tour02) {
+	public Tour[] doCrossover(Tour tour01, Tour tour02) {
 		final Tour tourChild = new Tour();
 		ArrayList<Integer> nonce=new ArrayList<Integer>();
 		int t1 = gibZufall(nonce,tour01.getSize() - 1);
@@ -47,7 +47,7 @@ public class HeuristicCrossover implements ICrossover {
 
 		}
 
-		return tourChild;
+		return new Tour[] { tourChild };
 	}
 	
 	private int gibZufall(ArrayList<Integer> d, int max)
