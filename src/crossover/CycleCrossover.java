@@ -7,6 +7,11 @@ import base.City;
 import base.Tour;
 import main.Configuration;
 
+/**
+ * 
+ * @author 3818468
+ *
+ */
 public class CycleCrossover implements ICrossover {
 	public Tour doCrossover(Tour tour01, Tour tour02) {
 		final List<Integer> cI = new Vector<Integer>();

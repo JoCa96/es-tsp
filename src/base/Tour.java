@@ -1,6 +1,7 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import main.Configuration;
 
@@ -83,16 +84,12 @@ public class Tour implements Comparable<Tour> {
 	}
 
 	public static Tour generateRandom() {
-    	ArrayList<City> cities = new ArrayList<City>();
-        for(City c: Configuration.instance.availableCities)
-        {
-        	int item;
-        	do{
-        		item = Configuration.instance.randomSeed.nextInt(Configuration.instance.availableCities.size());
-        	}while(cities.get(item)!=null);
-        		cities.set(item,c);
-        }
+		ArrayList<City> cities = new ArrayList<City>();
+		for (City c : Configuration.instance.availableCities) {
+			cities.add(c);
+		}
+		Collections.shuffle(cities);
 
-        return new Tour(cities);
-    }
+		return new Tour(cities);
+	}
 }
