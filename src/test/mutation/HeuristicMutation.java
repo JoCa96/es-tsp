@@ -7,7 +7,7 @@ import random.MersenneTwisterFast;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class HeuristicMutation  {
+public class HeuristicMutation  { /*
     double mutationRatio = 0.1;
     MersenneTwisterFast randomGen = new MersenneTwisterFast();
 
@@ -66,5 +66,5 @@ public class HeuristicMutation  {
     }
     public String toString() {
         return getClass().getSimpleName();
-    }
+    } */
 }

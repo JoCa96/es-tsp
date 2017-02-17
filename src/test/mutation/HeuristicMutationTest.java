@@ -15,7 +15,7 @@ public class HeuristicMutationTest extends AbstractTest{
         HeuristicMutation test = new HeuristicMutation();
         Population testPopulation = new Population();
         testPopulation.generateRandom();
-        test.executeMutation(testPopulation);
+      //  test.executeMutation(testPopulation);
 
     }
 
