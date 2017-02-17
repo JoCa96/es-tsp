@@ -9,12 +9,15 @@ import org.junit.Test;
 import base.City;
 import base.Tour;
 import crossover.CycleCrossover;
+import main.Application;
+import test.AbstractTest;
 
-public class CycleCrossoverTest {
+public class CycleCrossoverTest extends AbstractTest{
 
 	@Test
 	public void testDoCrossover() {
 		System.out.println("Starte Test CycleCrossover");
+		new Application();
 		Tour t1=Tour.generateRandom();
 		Tour t2=Tour.generateRandom();
 		System.out.println(t1);
