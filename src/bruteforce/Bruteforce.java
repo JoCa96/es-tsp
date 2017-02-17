@@ -66,7 +66,7 @@ public class Bruteforce {
         }
     }
 
-    public ... run(){
+    public void run(){
         this.getRandomCities();
 
 
