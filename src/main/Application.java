@@ -1,9 +1,13 @@
 package main;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
+import base.Pair;
 import base.Population;
-import crossover.ICrossover;
+import base.Tour;
+import crossover.*;
 import data.HSQLDBManager;
 import data.InstanceReader;
 import data.TSPLIBReader;
@@ -88,7 +92,39 @@ public class Application {
                 break;
         }
 
-        selection.doSelection(population);
+        ICrossover crossover;
+        switch (Configuration.instance.executionMode.crossoverMode) {
+            case CYCLE:
+                crossover = new CycleCrossover();
+                break;
+            case HEURISTIC:
+                crossover = new HeuristicCrossover();
+                break;
+            case ORDERED:
+                crossover = new OrderedCrossover();
+                break;
+            case PARTIALLY_MATCH:
+                crossover = new PartiallyMatchedCrossover();
+                break;
+            case POSITION_BASED:
+                crossover = new PositionBasedCrossover();
+                break;
+            case RANDOM:
+                crossover = new RandomCrossover();
+                break;
+            default:
+                crossover = new SubTourExchangeCrossover();
+                break;
+        }
+
+        List<Tour> children = new ArrayList<Tour>();
+
+        List<Pair<Tour, Tour>> selectedPopulation = selection.doSelection(population);
+        for (Pair<Tour, Tour> pair : selectedPopulation) {
+            Pair<Tour, Tour> newChildren = crossover.doCrossover(pair.getFirst(), pair.getSecond());
+            children.add(newChildren.getFirst());
+            children.add(newChildren.getSecond());
+        }
     }
 
     public static void main(String... args) {

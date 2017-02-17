@@ -1,5 +1,6 @@
 package crossover;
 
+import base.Pair;
 import base.Tour;
 import base.City;
 
@@ -8,7 +9,7 @@ import java.util.*;
 // author 1174535
 
 public class SubTourExchangeCrossover implements ICrossover {
-    public Tour[] doCrossover(Tour tour01,Tour tour02) {
+    public Pair<Tour, Tour> doCrossover(Tour tour01, Tour tour02) {
     int size = tour01.getSize();
 
     Random rn = new Random();
@@ -32,7 +33,7 @@ public class SubTourExchangeCrossover implements ICrossover {
         tour01.getCities().set(index, temp);
     }
 
-        return new Tour[] { tour01, tour02};
+        return new Pair<Tour, Tour>(tour01, tour02);
     }
 //pdf seite 96
     public String toString() {

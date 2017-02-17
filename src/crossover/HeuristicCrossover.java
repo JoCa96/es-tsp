@@ -2,6 +2,7 @@ package crossover;
 
 import java.util.ArrayList;
 
+import base.Pair;
 import base.Tour;
 import main.Configuration;
 
@@ -98,7 +99,7 @@ public class HeuristicCrossover implements ICrossover {
 	}
 
 	@Override
-	public Tour[] doCrossover(Tour tour01, Tour tour02) {
-		return new Tour[] { doSingleCrossover(tour01, tour02), doSingleCrossover(tour02, tour01) };
+	public Pair<Tour, Tour> doCrossover(Tour tour01, Tour tour02) {
+		return new Pair<Tour, Tour>(doSingleCrossover(tour01, tour02), doSingleCrossover(tour02, tour01));
 	}
 }
